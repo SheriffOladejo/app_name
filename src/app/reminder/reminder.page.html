@@ -1,0 +1,42 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start"><ion-back-button></ion-back-button></ion-buttons>
+    <ion-title *ngIf="text">{{ text.reminder }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="text">
+
+<ion-fab slot="fixed" horizontal="end" vertical="top" (click)="openModel()" >
+<ion-fab-button>
+<ion-icon name="add"></ion-icon>
+</ion-fab-button>
+</ion-fab>
+
+<div *ngIf="!data" class="ion-padding">
+<ion-skeleton-text [animated]="true" class="sek2" *ngFor="let f of fakeData"></ion-skeleton-text>
+</div>
+
+<p class="no" *ngIf="data && allData.length == 0">There is no reminders yet to display.</p>
+
+<div *ngIf="data">
+<br>
+<ion-searchbar *ngIf="allData && allData.length > 0" mode="ios" color="light" [(ngModel)]="term" (ionInput)="onSearchChange()" placeholder="{{ text.search }}"></ion-searchbar>
+<ion-item-sliding *ngFor="let rem of data">
+<ion-item mode="md" lines="full">
+<ion-label>{{ rem.title }} <span [class]="rem.type == 1 ? 'red' : 'green'">{{ currency }}{{ rem.amount }}</span> 
+
+<span class="date">{{ rem.reminder_date }}</span>
+
+</ion-label>
+<ion-icon [name]="rem.type == 1 ? 'arrow-down-outline' : 'arrow-up-outline' " slot="start" [color]="rem.type == 1 ? 'danger' : 'primary'"></ion-icon>
+</ion-item>
+<ion-item-options>
+  <ion-item-option color="primary" (click)="openModel(rem)">&nbsp;&nbsp;<ion-icon name="create-outline"></ion-icon>&nbsp;&nbsp;</ion-item-option>
+  <ion-item-option color="danger" (click)="remove(rem.id)">&nbsp;&nbsp;<ion-icon name="trash-outline"></ion-icon>&nbsp;&nbsp;</ion-item-option>
+</ion-item-options>
+</ion-item-sliding>
+
+</div>
+
+</ion-content>

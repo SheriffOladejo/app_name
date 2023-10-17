@@ -1,0 +1,64 @@
+ion-content
+{
+    --background:var(--ion-color-light);
+}
+
+ion-title
+{
+    color:black;
+}
+
+.heading
+{
+    color:gray;
+    padding:10px 10px
+}
+
+.top
+{
+    height: auto;
+    background: white;
+    margin-top: -15px;
+}
+
+.total
+{
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+.green
+{
+    float:right;
+    color:var(--ion-color-primary);
+}
+
+.balance
+{
+    float:right;
+    color:var(--ion-color-dark);
+    font-weight: bold;
+}
+
+.red
+{
+    float:right;
+    color:var(--ion-color-danger);
+}
+
+.date
+{
+    margin-top: 5px;
+    display: block;
+    color:gray;
+}
+
+.pdf
+{
+    float:right;
+    margin-top:-5px
+}
+
+p{
+    padding:10px 10px;
+}

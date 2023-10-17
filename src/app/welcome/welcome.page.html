@@ -1,0 +1,21 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" *ngIf="admin">
+
+<img src="{{ img }}">
+<br><br>
+<h1 align="center">{{ admin.welcome_title }}</h1>
+
+<p>{{ admin.welcome_text }}</p>
+
+<br>
+
+<ion-row style="text-align: center;">
+<ion-col size="6"><ion-button color="primary" mode="ios" shape="round" expand="block" routerLink="/login">Login <ion-icon name="log-in-outline" slot="end"></ion-icon></ion-button></ion-col>
+<ion-col size="6"><ion-button color="dark" mode="ios" shape="round" expand="block" routerLink="/signup">Signup <ion-icon name="create-outline" slot="end"></ion-icon></ion-button></ion-col>
+</ion-row>
+
+</ion-content>

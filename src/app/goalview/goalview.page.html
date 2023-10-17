@@ -1,0 +1,36 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title>View Detail</ion-title>
+    <ion-buttons slot="start"><ion-back-button></ion-back-button></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="goal">
+  <h1 class="title">{{ goal.title }}</h1>
+
+  <ion-item>
+  <ion-label>Total Amount Need <span class="desc">{{ currency }}{{ goal.total_amount }}</span></ion-label>
+  <ion-icon name="cash-outline" slot="start" color="primary"></ion-icon>
+  </ion-item>
+
+  <ion-item>
+  <ion-label>Amount Saved <span class="desc">{{ currency }}{{ goal.paid_amount }}</span></ion-label>
+  <ion-icon name="checkmark-circle-outline" slot="start" color="primary"></ion-icon>
+  </ion-item>
+
+  <ion-item>
+  <ion-label>Pending Amount <span class="desc">{{ currency }}{{ goal.pending }}</span></ion-label>
+  <ion-icon name="cash-outline" slot="start" color="primary"></ion-icon>
+  </ion-item>
+
+  <ion-item>
+  <ion-label>Estimated Date <span class="desc">{{ goal.till_date }}</span></ion-label>
+  <ion-icon name="calendar-outline" slot="start" color="primary"></ion-icon>
+  </ion-item>
+
+ <ion-row>
+<ion-col size="4"><ion-button mode="ios" shape="round" size="small" (click)="openModel(goal)" color="dark">Update</ion-button></ion-col>
+<ion-col size="4"><ion-button mode="ios" shape="round" size="small" color="primary" (click)="complete(goal.id)">Complete</ion-button></ion-col>
+<ion-col size="4"><ion-button mode="ios" shape="round" size="small" color="danger" (click)="remove(goal.id)">Delete</ion-button></ion-col>
+ </ion-row>
+</ion-content>

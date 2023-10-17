@@ -1,0 +1,214 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title *ngIf="user">{{ user.name }}</ion-title>
+    <ion-buttons slot="start"><ion-menu-button></ion-menu-button></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="text">
+
+<div *ngIf="!data">
+<ion-skeleton-text [animated]="true" class="sek1"></ion-skeleton-text>
+<ion-row class="topSek">
+<ion-col size="3"><ion-skeleton-text [animated]="true" class="sek2"></ion-skeleton-text></ion-col>
+<ion-col size="3"><ion-skeleton-text [animated]="true" class="sek2"></ion-skeleton-text></ion-col>
+<ion-col size="3"><ion-skeleton-text [animated]="true" class="sek2"></ion-skeleton-text></ion-col>
+<ion-col size="3"><ion-skeleton-text [animated]="true" class="sek2"></ion-skeleton-text></ion-col>
+</ion-row>
+<br><br>
+<ion-skeleton-text [animated]="true" class="sek3"></ion-skeleton-text>
+<br>
+<ion-row class="btnSek">
+<ion-col size="4"><ion-skeleton-text [animated]="true" class="sek4"></ion-skeleton-text></ion-col>
+<ion-col size="4"><ion-skeleton-text [animated]="true" class="sek4"></ion-skeleton-text></ion-col>
+<ion-col size="4"><ion-skeleton-text [animated]="true" class="sek4"></ion-skeleton-text></ion-col>
+</ion-row>
+<br>
+<ion-skeleton-text [animated]="true" class="sek5" *ngFor="let fake of fakeData"></ion-skeleton-text>
+</div>
+
+<div *ngIf="data">
+<div class="top">
+<div class="ion-padding">
+<h1 routerLink="/bank">{{ currency }}{{ data.balance }} <ion-icon name="wallet-outline" color="tertiary"></ion-icon><b>{{ text.avl_balance }}</b></h1>
+
+<ion-row>
+<ion-col size="3" routerLink="/income/1"><ion-icon name="arrow-up-outline" color="primary"></ion-icon><span>{{ text.income }}</span></ion-col>
+<ion-col size="3" routerLink="/income/2"><ion-icon name="arrow-down-outline" color="primary"></ion-icon><span>{{ text.expense }}</span></ion-col>
+<ion-col size="3" routerLink="/goal"><ion-icon name="trophy-outline" color="primary"></ion-icon><span>{{ text.goal }}</span></ion-col>
+<ion-col size="3" routerLink="/reminder"><ion-icon name="alarm-outline" color="primary"></ion-icon><span>{{ text.reminder }}</span></ion-col>
+</ion-row>
+
+</div>
+</div>
+
+<div class="recent">
+
+<h4>{{ text.recent }} <a routerLink="/trans/0">{{ text.view_all }}</a></h4>
+<p>{{ text.last_10 }}</p>
+
+<ion-segment [scrollable]="true" mode="md" [(ngModel)]="type">
+<ion-segment-button [value]="0" color="primary">{{ text.all }}</ion-segment-button>
+<ion-segment-button [value]="1">{{ text.income }}</ion-segment-button>
+<ion-segment-button [value]="2">{{ text.expense }}</ion-segment-button>
+</ion-segment>
+
+<div [ngSwitch]="type">
+<div *ngSwitchCase="0" class="l">
+
+<p *ngIf="data.all.length == 0" class="no"><br><br>{{ text.no_trans }}</p>
+
+<ion-item lines="none" mode="md" *ngFor="let all of data.all" id="open-modal-{{ all.id }}">
+<ion-label>{{ all.bank }} <span [class]="all.type == 1 ? 'green' : 'red'">{{ currency }}{{ all.amount }}</span><small>{{ all.formatted_date_added }} {{ all.notes }}</small></ion-label>
+<ion-icon [name]="all.type == 1 ? 'arrow-up-outline' : 'arrow-down-outline' " [color]="all.type == 1 ? 'primary' : 'danger'" slot="start"></ion-icon>
+<!--View data-->
+<ion-modal trigger="open-modal-{{ all.id }}" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+  <ng-template>
+  <div class="block">
+  
+  <h1 *ngIf="all.type == 1">{{ text.income_detail }}</h1>
+  <h1 *ngIf="all.type == 2">{{ text.expense_detail }}</h1>
+  
+  <ion-item lines="full">
+  <ion-icon name="wallet-outline" slot="start" color="primary"></ion-icon>
+  <ion-label class="ion-text-wrap">{{ text.payment_method }} <span class="desc">{{ all.bank }}</span></ion-label>
+  </ion-item>
+  
+  <ion-item lines="full">
+  <ion-icon name="card-outline" slot="start" color="primary"></ion-icon>
+  <ion-label class="ion-text-wrap">{{ text.amount }} <span class="desc">{{ currency }}{{ all.amount }}</span></ion-label>
+  </ion-item>
+  
+  <ion-item lines="full">
+  <ion-icon name="calendar-outline" slot="start" color="primary"></ion-icon>
+  <ion-label class="ion-text-wrap">{{ text.date_added }} <span class="desc">{{ all.date_added }}</span></ion-label>
+  </ion-item>
+  
+  <ion-item lines="full" *ngIf="all.img">
+  <ion-icon name="calendar-outline" slot="start" color="primary"></ion-icon>
+  <ion-label class="ion-text-wrap">{{ text.attach }} <span class="desc"><a (click)="viewImg(all.img)">{{ text.view }}</a></span></ion-label>
+  </ion-item>
+  
+  <ion-item lines="full" *ngIf="all.notes">
+  <ion-icon name="create-outline" slot="start" color="primary"></ion-icon>
+  <ion-label class="ion-text-wrap">{{ text.notes }} <span class="notes">{{ all.notes }}</span></ion-label>
+  </ion-item>
+  
+  </div>
+  </ng-template>
+  </ion-modal>
+</ion-item>
+
+</div>
+<div *ngSwitchCase="1" class="l">
+<p *ngIf="data.income.length == 0" class="no"><br><br>{{ text.no_trans }}</p>
+<ion-item lines="none" mode="md"  id="open-modal-all-{{ all.id }}" *ngFor="let all of data.income">
+<ion-label>{{ all.bank }} <span class="green">{{ currency }}{{ all.amount }}</span><small class="ismall">{{ all.formatted_date_added }} {{ all.notes }}</small></ion-label>
+
+<ion-icon name="arrow-up-outline" color="primary" slot="start"></ion-icon>
+<!--View data-->
+<ion-modal trigger="open-modal-all-{{ all.id }}" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+  <ng-template>
+  <div class="block">
+  
+  <h1>{{ text.income_detail }}</h1>
+  
+  <ion-item lines="full">
+  <ion-icon name="wallet-outline" slot="start" color="primary"></ion-icon>
+  <ion-label class="ion-text-wrap">{{ text.payment_method }} <span class="desc">{{ all.bank }}</span></ion-label>
+  </ion-item>
+  
+  <ion-item lines="full">
+  <ion-icon name="card-outline" slot="start" color="primary"></ion-icon>
+  <ion-label class="ion-text-wrap">{{ text.amount }} <span class="desc">{{ currency }}{{ all.amount }}</span></ion-label>
+  </ion-item>
+  
+  <ion-item lines="full">
+  <ion-icon name="calendar-outline" slot="start" color="primary"></ion-icon>
+  <ion-label class="ion-text-wrap">{{ text.date_added }} <span class="desc">{{ all.date_added }}</span></ion-label>
+  </ion-item>
+  
+  <ion-item lines="full" *ngIf="all.img">
+  <ion-icon name="calendar-outline" slot="start" color="primary"></ion-icon>
+  <ion-label class="ion-text-wrap">{{ text.attach }} <span class="desc"><a (click)="viewImg(all.img)">{{ text.view }}</a></span></ion-label>
+  </ion-item>
+  
+  <ion-item lines="full" *ngIf="all.notes">
+  <ion-icon name="create-outline" slot="start" color="primary"></ion-icon>
+  <ion-label class="ion-text-wrap">{{ text.notes }} <span class="notes">{{ all.notes }}</span></ion-label>
+  </ion-item>
+  
+  </div>
+  </ng-template>
+  </ion-modal>
+</ion-item>
+
+
+
+</div>
+<div *ngSwitchCase="2" class="l">
+<p *ngIf="data.expense.length == 0" class="no"><br><br>{{ text.no_trans }}</p>
+
+<ion-item lines="none" mode="md" *ngFor="let all of data.expense" id="open-modal-ex-{{ all.id }}">
+<ion-label>{{ all.bank }} <span class="red">{{ currency }}{{ all.amount }}</span><small>{{ all.formatted_date_added }} {{ all.notes }}</small></ion-label>
+<ion-icon name="arrow-down-outline" color="danger" slot="start"></ion-icon>
+
+<!--View data-->
+<ion-modal trigger="open-modal-ex-{{ all.id }}" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+  <ng-template>
+  <div class="block">
+  
+  <h1>{{ text.expense_detail }}</h1>
+  
+  <ion-item lines="full">
+  <ion-icon name="wallet-outline" slot="start" color="primary"></ion-icon>
+  <ion-label class="ion-text-wrap">{{ text.payment_method }} <span class="desc">{{ all.bank }}</span></ion-label>
+  </ion-item>
+  
+  <ion-item lines="full">
+  <ion-icon name="card-outline" slot="start" color="primary"></ion-icon>
+  <ion-label class="ion-text-wrap">{{ text.amount }} <span class="desc">{{ currency }}{{ all.amount }}</span></ion-label>
+  </ion-item>
+  
+  <ion-item lines="full">
+  <ion-icon name="calendar-outline" slot="start" color="primary"></ion-icon>
+  <ion-label class="ion-text-wrap">{{ text.date_added }} <span class="desc">{{ all.date_added }}</span></ion-label>
+  </ion-item>
+  
+  <ion-item lines="full" *ngIf="all.img">
+  <ion-icon name="calendar-outline" slot="start" color="primary"></ion-icon>
+  <ion-label class="ion-text-wrap">{{ text.attach }} <span class="desc"><a (click)="viewImg(all.img)">{{ text.view }}</a></span></ion-label>
+  </ion-item>
+  
+  <ion-item lines="full" *ngIf="all.notes">
+  <ion-icon name="create-outline" slot="start" color="primary"></ion-icon>
+  <ion-label class="ion-text-wrap">{{ text.notes }} <span class="notes">{{ all.notes }}</span></ion-label>
+  </ion-item>
+  
+  </div>
+  </ng-template>
+  </ion-modal>
+</ion-item>
+</div>
+</div>
+<h4 class="reminder" *ngIf="data.reminder.length > 0">{{ text.payment_reminder }} <a routerLink="/reminder">{{ text.view_all }}</a></h4>
+
+<ion-item lines="none" mode="md" *ngFor="let rem of data.reminder" routerLink="/reminder">
+<ion-label>{{ rem.title }} <span [class]="rem.type == 2 ? 'rGreen' : 'rRed'">{{ currency }}{{ rem.amount }} <small>{{ rem.reminder_date | date:'dd-MMM-yyyy' }}</small></span></ion-label>
+<ion-icon [name]="rem.type == 2 ? 'arrow-up-outline' : 'arrow-down-outline' " [color]="rem.type == 2 ? 'primary' : 'danger'" slot="start"></ion-icon>
+
+</ion-item>
+
+<h4 class="goalTitle" *ngIf="data.goal.length > 0">{{ text.fgoal }}<a routerLink="/goal">{{ text.view_all }}</a></h4>
+
+<ion-item *ngFor="let goal of data.goal" mode="md" lines="none" (click)="view(goal)">
+<ion-label>{{ goal.title }} <span class="per">{{ goal.per }}%</span> <span class="goal">{{ currency }}{{ goal.total_amount }}  &nbsp;&nbsp;{{ goal.till_date }}</span> 
+
+<ion-progress-bar [value]="goal.per/100"></ion-progress-bar>
+</ion-label>
+<ion-icon [name]="goal.status == 0 ? 'trophy-outline' : 'trophy'" slot="start" color="primary"></ion-icon>
+</ion-item>
+<br>
+</div>
+</div>
+</ion-content>

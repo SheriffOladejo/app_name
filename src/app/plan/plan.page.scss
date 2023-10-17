@@ -1,0 +1,46 @@
+ion-content
+{
+    --background:var(--ion-color-light);
+}
+
+.sek
+{
+    height:50px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+p
+{
+    color:gray;
+}
+
+ion-item
+{
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+span
+{
+    color:gray;
+}
+
+small
+{
+    margin-top: 5px;
+    display: block;
+    color:gray;
+}
+
+ion-card-title
+{
+    font-size: 20px;
+}
+
+.amount
+{
+    float:right;
+    color:gray;
+    font-size: 16px;
+}

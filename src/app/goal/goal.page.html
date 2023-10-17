@@ -1,0 +1,36 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+<ion-buttons slot="start"><ion-back-button></ion-back-button></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" *ngIf="text">
+
+<div *ngIf="!data">
+<ion-skeleton-text [animated]="true" class="sek" *ngFor="let fake of fakeData"></ion-skeleton-text>
+</div>
+
+<div *ngIf="data">
+<img src="assets/money.png">
+
+<h1 *ngIf="total">{{ currency }}{{ total }}</h1>
+<h1 *ngIf="!total">{{ currency }}0.00</h1>
+
+<p class="amount">{{ text.total_save }}</p>
+
+<ion-button color="primary" mode="ios" (click)="openModel()">{{ text.add_new_goal }}</ion-button><br><br>
+
+<p *ngIf="data && data.length == 0" class="no">{{ text.no_goal }}</p>
+
+
+<ion-item *ngFor="let goal of data" mode="md" lines="none" (click)="view(goal)">
+<ion-label>{{ goal.title }} <span class="per">{{ goal.per }}%</span> <span class="goal">{{ currency }}{{ goal.total_amount }}  &nbsp;&nbsp;{{ goal.till_date }}</span> 
+
+<ion-progress-bar [value]="goal.per/100"></ion-progress-bar>
+</ion-label>
+<ion-icon [name]="goal.status == 0 ? 'trophy-outline' : 'trophy'" slot="start" color="primary"></ion-icon>
+</ion-item>
+
+</div>
+
+</ion-content>

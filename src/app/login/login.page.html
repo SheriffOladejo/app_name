@@ -1,0 +1,29 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-title></ion-title>
+    <ion-buttons slot="start"><ion-back-button></ion-back-button></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  
+<img src="assets/login.svg">
+
+<br><br><br>
+<h1>Welcome Back</h1>
+<p>Please login for Continue & Manage you finace.</p>
+
+<form #form="ngForm" (ngSubmit)="login(form.value)">
+<ion-input label="Email" name="email" [(ngModel)]="email" label-placement="floating" fill="outline" mode="md" [disabled]="hasClick"></ion-input><br>
+<ion-input type="password" label="Password" name="password" [(ngModel)]="password" label-placement="floating" fill="outline" mode="md" [disabled]="hasClick"></ion-input><br>
+
+<p align="right" style="font-size: 14px;color:gray">Forgot your password? <a routerLink="/forgot">Reset here</a></p>
+
+<ion-button mode="ios" expand="block" color="primary" type="submit" *ngIf="!hasClick">Login</ion-button>
+<ion-button mode="ios" expand="block" color="primary" type="button" *ngIf="hasClick"><ion-spinner name="crescent"></ion-spinner></ion-button>
+
+
+
+</form>
+
+</ion-content>

@@ -1,0 +1,58 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons><ion-back-button></ion-back-button></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="text">
+<div class="top">&nbsp;
+<h1>{{ text.setting }}</h1>
+<ion-segment [scrollable]="true" value="1" mode="md" [(ngModel)]="type" color="light">
+<ion-segment-button [value]="1" color="light">{{ text.gen_info }}</ion-segment-button>
+<ion-segment-button [value]="2" color="light">{{ text.password }}</ion-segment-button>
+<ion-segment-button [value]="3" color="light">{{ text.currency }}</ion-segment-button>
+</ion-segment>
+</div>
+
+<div [ngSwitch]="type" class="ion-padding">
+
+<div *ngSwitchCase="1" class="l">
+<form #form="ngForm" (ngSubmit)="update(form.value)">
+<ion-input label="{{ text.your_name }}" name="name" [(ngModel)]="data.name" label-placement="floating" fill="outline" mode="md" [disabled]="hasClick" required></ion-input><br>
+<ion-input type="tel" label="{{ text.phone }}" name="phone" [(ngModel)]="data.phone" label-placement="floating" fill="outline" mode="md" [disabled]="hasClick" required></ion-input><br>
+<ion-input type="email" label="{{ text.email }}" name="email" [(ngModel)]="data.email" label-placement="floating" fill="outline" mode="md" [disabled]="hasClick" required></ion-input><br>
+
+<ion-button mode="ios" expand="block" color="primary" type="submit" *ngIf="!hasClick" [disabled]="!form.valid">{{ text.update }}</ion-button>
+<ion-button mode="ios" expand="block" color="primary" type="button" *ngIf="hasClick"><ion-spinner name="crescent"></ion-spinner></ion-button>
+</form>
+</div>
+
+<div *ngSwitchCase="2" class="l">
+<form #form="ngForm" (ngSubmit)="updatePass(form.value)">
+
+<ion-input type="password" label="{{ text.cu_password }}" name="password" ngModel label-placement="floating" fill="outline" mode="md" [disabled]="hasClick" required></ion-input><br>
+
+<ion-input type="password" label="{{ text.new_pass }}" name="new_password" ngModel label-placement="floating" fill="outline" mode="md" [disabled]="hasClick" required></ion-input><br>
+
+<ion-input type="password" label="{{ text.c_pass }}" name="c_password" ngModel label-placement="floating" fill="outline" mode="md" [disabled]="hasClick" required></ion-input><br>
+
+<ion-button mode="ios" expand="block" color="primary" type="submit" *ngIf="!hasClick">{{ text.change_pass }}</ion-button>
+<ion-button mode="ios" expand="block" color="primary" type="button" *ngIf="hasClick"><ion-spinner name="crescent"></ion-spinner></ion-button>
+</form>
+</div>
+
+<div *ngSwitchCase="3" class="l">
+<form #form="ngForm" (ngSubmit)="update(form.value)">
+
+<ion-input type="text" label="{{ text.currency_sign }}" name="currency" [(ngModel)]="data.currency" label-placement="floating" fill="outline" mode="md" [disabled]="hasClick" required placeholder="e.g $"></ion-input><br>
+
+<ion-button mode="ios" expand="block" color="primary" type="submit" *ngIf="!hasClick" [disabled]="!form.valid">{{ text.update }}</ion-button>
+<ion-button mode="ios" expand="block" color="primary" type="button" *ngIf="hasClick"><ion-spinner name="crescent"></ion-spinner></ion-button>
+</form>
+</div>
+
+</div>
+
+
+
+</ion-content>

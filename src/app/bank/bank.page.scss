@@ -1,0 +1,83 @@
+.no
+{
+    color:gray;
+    text-align: center;
+    margin-bottom: 10%;
+    margin-top: 20%;
+}
+
+.block {
+    width: 100%;
+    height: 400px;
+  }
+  
+  ion-modal {
+    --height: auto;
+  }
+
+  .sek
+  {
+    width: 90%;
+    margin-top: 30px !important;
+    height: 100px;
+    margin: auto;
+    border-radius: 10px;
+  }
+
+  
+
+
+.wallet
+{
+    width: 70%;
+    margin-left: 15%;
+}
+
+.avial
+{
+    color:gray
+}
+
+ion-row
+{
+    background-color: var(--ion-color-light) !important;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding:10px 10px;
+    color:black;
+}
+
+.name
+{
+    font-size: 17px;
+}
+
+.balance
+{
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.notes
+{
+    color:gray;
+}
+
+h4
+{
+    color:gray;
+}
+
+ion-col ion-icon
+{
+    float: right;
+    font-size: 25px;
+}
+
+h1 p
+{
+    display: block;
+    line-height: 0.2;
+    color:gray;
+    font-size: 15px;
+}

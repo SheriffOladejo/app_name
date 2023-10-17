@@ -1,0 +1,28 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+  <ion-buttons><ion-back-button></ion-back-button></ion-buttons>
+  </ion-toolbar>
+  </ion-header>
+  <ion-content [fullscreen]="true" class="ion-padding">
+  
+<form #form="ngForm" (ngSubmit)="verify(form.value)">
+<h1>Verify Your Email</h1>
+<p class="desc">A verification code has been sent on you email address. Plase check and continue.</p>
+<br>
+<ion-row *ngIf="!hasClick">
+<ion-col size="3"><ion-input type="tel" #otp1 maxlength="1" name="otp_1" ngModel (ionInput)="otpChange($event,otp2,'')"></ion-input></ion-col>
+<ion-col size="3"><ion-input type="tel" #otp2 maxlength="1" name="otp_2" ngModel (ionInput)="otpChange($event,otp3,otp1)"></ion-input></ion-col>
+<ion-col size="3"><ion-input type="tel" #otp3 maxlength="1" name="otp_3" ngModel (ionInput)="otpChange($event,otp4,otp2)"></ion-input></ion-col>
+<ion-col size="3"><ion-input type="tel" #otp4 maxlength="1" name="otp_4" ngModel (ionInput)="otpChange($event,'',otp3)"></ion-input></ion-col>
+</ion-row>
+
+<p *ngIf="hasClick" align="center"><ion-spinner name="crescent"></ion-spinner></p>
+
+<br>
+
+<ion-button mode="ios" expand="block" color="primary" type="submit" *ngIf="!hasClick">Verify</ion-button>
+<br>
+<p align="center" class="again">Didn't receive the OTP? <a (click)="resend()">Resend</a></p>
+</form>
+  
+</ion-content>

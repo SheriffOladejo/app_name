@@ -1,0 +1,30 @@
+<ion-content class="ion-padding" *ngIf="text">
+
+  <a (click)="close()">{{ text.close }}</a><br><br>
+  
+  <h3>{{ text.add_new_goal }}</h3><br>
+  
+  <form #form="ngForm" (ngSubmit)="addNew(form.value)">
+
+  <ion-input label="Goal Title" name="title" [(ngModel)]="data.title" label-placement="floating" fill="outline" mode="md" [disabled]="hasClick" required></ion-input><br>
+
+  <ion-item lines="none">
+  <ion-label>{{ text.est_date }}</ion-label>
+  <ion-input value="{{ till_date | date: 'dd-MM-yyyy' }}" id="f" class="ion-text-end" [disabled]="hasClick"></ion-input>
+
+  <ion-popover trigger="f" size="auto">
+  <ng-template>
+  <ion-datetime presentation="date" [(ngModel)]="till_date"  locale="en" name="till_date" showDefaultButtons="true" required></ion-datetime>
+  </ng-template>
+  </ion-popover>
+  </ion-item><br>
+
+  <ion-input type="tel" label="{{ text.total_amount_need }}" name="total_amount" [(ngModel)]="data.total_amount" label-placement="floating" fill="outline" mode="md" [disabled]="hasClick" required></ion-input><br>
+
+  <ion-input type="tel" label="{{ text.amount_you_have }}" name="paid_amount" [(ngModel)]="data.paid_amount" label-placement="floating" fill="outline" mode="md" [disabled]="hasClick"></ion-input><br>
+
+  <ion-button mode="ios" expand="block"  type="submit" *ngIf="!hasClick" [disabled]="!form.valid">{{ text.save }}</ion-button>
+  <ion-button mode="ios" expand="block" type="button" *ngIf="hasClick"><ion-spinner name="crescent"></ion-spinner></ion-button>
+  </form>
+  
+  </ion-content>

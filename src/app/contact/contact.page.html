@@ -1,0 +1,23 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start"><ion-back-button></ion-back-button></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" *ngIf="text">
+  
+<img src="assets/contact.avif">
+<h1>Contact Us</h1>
+<p>Have any query? Please send us a message, we will contact you soon.</p>
+
+<br>
+<form #form="ngForm" (ngSubmit)="send(form.value)">
+<ion-input label="Your name" name="name" ngModel label-placement="floating" fill="outline" mode="md" [disabled]="hasClick" required></ion-input><br>
+<ion-input label="Phone" name="phone" ngModel label-placement="floating" fill="outline" mode="md" [disabled]="hasClick" required></ion-input><br>
+<ion-input label="Email" name="email" ngModel label-placement="floating" fill="outline" mode="md" [disabled]="hasClick" required></ion-input><br>
+<ion-textarea label="Your Message" name="msg" ngModel label-placement="floating" fill="outline" mode="md" class="msg" [disabled]="hasClick" required></ion-textarea><br>
+<ion-button mode="ios" expand="block"  type="submit" *ngIf="!hasClick" [disabled]="!form.valid">{{ text.send }}</ion-button>
+<ion-button mode="ios" expand="block"  type="button" *ngIf="hasClick"><ion-spinner name="crescent"></ion-spinner></ion-button>
+
+  </form>
+</ion-content>

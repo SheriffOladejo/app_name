@@ -1,0 +1,63 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title *ngIf="text">{{ text.menu_plan }}</ion-title>
+    <ion-buttons slot="start"><ion-back-button></ion-back-button></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="text">
+  
+<div *ngIf="!data" class="ion-padding">
+<ion-skeleton-text [animated]="true" class="sek" *ngFor="let fake of fakeData"></ion-skeleton-text>
+</div>
+  
+<div *ngIf="data">
+<div class="ion-padding">
+<h1>{{ text.plan_title }}</h1>
+<p>{{ text.plan_desc }}</p>
+
+<ion-item lines="none" *ngIf="user_plan && user_plan.id">
+<ion-label><b>{{ user_plan.plan_name }}</b><small>{{ text.valid_till }} {{ user.valid_till | date:'dd-MMM-yyyy' }}</small></ion-label>
+<ion-icon name="checkmark-circle-outline" slot="start" color="primary"></ion-icon>
+</ion-item>
+
+</div>
+
+<ion-card mode="ios" *ngFor="let plan of data">
+<ion-card-header>
+<ion-card-title>{{ plan.title }} <span class="amount">{{ admin.currency }}{{ plan.amount }}</span></ion-card-title>
+<ion-card-subtitle></ion-card-subtitle>
+</ion-card-header>
+
+<ion-card-content>
+<span>{{ plan.text }}</span>
+
+<ion-item lines="full">
+<ion-label>{{ text.income_entry }} <span class="amount">{{ plan.income }}</span></ion-label>
+<ion-icon name="log-in-outline" slot="start" color="primary"></ion-icon>
+</ion-item>
+
+<ion-item lines="full">
+<ion-label>{{ text.expense_entry }} <span class="amount">{{ plan.expense }}</span></ion-label>
+<ion-icon name="log-out-outline" slot="start" color="primary"></ion-icon>
+</ion-item>
+
+<ion-item lines="full">
+<ion-label>{{ text.goal_entry }} <span class="amount">{{ plan.goal }}</span></ion-label>
+<ion-icon name="trophy-outline" slot="start" color="primary"></ion-icon>
+</ion-item>
+
+<ion-item>
+<ion-label>{{ text.reminder_entry }} <span class="amount">{{ plan.reminder }}</span></ion-label>
+<ion-icon name="alarm-outline" slot="start" color="primary"></ion-icon>
+</ion-item>
+<br>
+<ion-button expand="block" mode="ios" (click)="paymentSheet(plan)" *ngIf="plan.amount > 0">{{ text.choose_plan }}</ion-button>
+<ion-button expand="block" mode="ios" (click)="assignPlan(plan.id,plan)" *ngIf="plan.amount == 0">{{ text.choose_plan }}</ion-button>
+</ion-card-content>
+
+</ion-card>
+
+</div>
+
+</ion-content>

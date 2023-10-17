@@ -1,29 +1,46 @@
-<ion-app>
+<ion-app dir="{{ dir }}">
   <ion-split-pane contentId="main-content">
-    <ion-menu contentId="main-content" type="overlay">
-      <ion-content>
+    <ion-menu contentId="main-content" type="push" swipeGesture="false">
+      
+      <ion-content *ngIf="user && text">
+        <br><br>
         <ion-list id="inbox-list">
-          <ion-list-header>Inbox</ion-list-header>
-          <ion-note>hi@ionicframework.com</ion-note>
+          <ion-list-header>{{ user.name }}</ion-list-header>
+          <ion-note>{{ user.email }}</ion-note>
 
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+            <ion-item [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
               <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="false">
+            <ion-item lines="none" detail="false" routerLink="/plan">
+              <ion-label>{{ text.menu_plan }}</ion-label>
+              <ion-icon name="star" slot="start"></ion-icon>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="false">
+            <ion-item lines="none" detail="false" (click)="removeAccount()">
+              <ion-label>{{ text.menu_delete }}</ion-label>
+              <ion-icon name="trash" slot="start"></ion-icon>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="false" (click)="logout()">
+            <ion-item lines="none" detail="false">
+              <ion-label>{{ text.menu_logout }}</ion-label>
+              <ion-icon name="log-out" slot="start"></ion-icon>
+            </ion-item>
+          </ion-menu-toggle>
+
         </ion-list>
 
-        <ion-list id="labels-list">
-          <ion-list-header>Labels</ion-list-header>
-
-          <ion-item *ngFor="let label of labels" lines="none">
-            <ion-icon aria-hidden="true" slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
-            <ion-label>{{ label }}</ion-label>
-          </ion-item>
-        </ion-list>
+       
       </ion-content>
     </ion-menu>
-    <ion-router-outlet id="main-content"></ion-router-outlet>
+    <ion-router-outlet id="main-content" dir="{{ dir }}"></ion-router-outlet>
   </ion-split-pane>
 </ion-app>

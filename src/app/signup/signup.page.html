@@ -1,0 +1,25 @@
+<ion-header class="ion-no-border">
+<ion-toolbar color="light">
+<ion-buttons slot="start"><ion-back-button></ion-back-button></ion-buttons>
+</ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+<h1>Register your free account</h1>
+<br>
+<form #form="ngForm" (ngSubmit)="signup(form.value)">
+<ion-input label="First and Last Name" name="name" ngModel label-placement="floating" fill="outline" mode="md" required [disabled]="hasClick"></ion-input><br>
+<ion-input label="Phone" name="phone" ngModel label-placement="floating" fill="outline" mode="md" required [disabled]="hasClick"></ion-input><br>
+<ion-input label="Email" name="email" ngModel label-placement="floating" fill="outline" mode="md" required [disabled]="hasClick"></ion-input><br>
+<ion-input type="password" label="Choose Password" name="password" ngModel label-placement="floating" fill="outline" mode="md" required [disabled]="hasClick"></ion-input><br>
+
+
+<ion-button mode="ios" expand="block" color="primary" type="submit" *ngIf="!hasClick" [disabled]="!form.valid">Signup</ion-button>
+<ion-button mode="ios" expand="block" color="primary" type="button" *ngIf="hasClick"><ion-spinner name="crescent"></ion-spinner></ion-button>
+
+
+
+</form>
+
+</ion-content>

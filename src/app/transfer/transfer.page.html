@@ -1,0 +1,35 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title *ngIf="to_bank">Transfer into {{ to_bank }}</ion-title>
+    <ion-buttons slot="start"><ion-back-button></ion-back-button></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+<br>
+<form #form="ngForm" (ngSubmit)="addNew(form.value)">
+
+  <ion-item lines="none">
+  <ion-label>Select Date</ion-label>
+  <ion-input value="{{ date_added | date: 'dd-MM-yyyy' }}" id="f" class="ion-text-end" [disabled]="hasClick"></ion-input>
+
+  <ion-popover trigger="f" size="auto">
+  <ng-template>
+  <ion-datetime presentation="date" [(ngModel)]="date_added"  locale="en" name="date_added" showDefaultButtons="true" required></ion-datetime>
+  </ng-template>
+  </ion-popover>
+  </ion-item><br>
+
+  <ion-select label="From Payment Method" placeholder="Select" ngModel name="from" required [disabled]="hasClick" interface="action-sheet" mode="md">
+  <ion-select-option [value]="b.id" *ngFor="let b of banks">{{ b.name }} - Rs.{{ b.balance }}</ion-select-option>
+  </ion-select>
+  <br>
+  <ion-input type="tel" label="Amount" name="amount" ngModel label-placement="floating" fill="outline" mode="md" [disabled]="hasClick" required></ion-input><br>
+  <ion-input label="Any Notes" name="notes" ngModel label-placement="floating" fill="outline" mode="md" [disabled]="hasClick"></ion-input><br>
+
+  
+  <ion-button mode="ios" expand="block" color="primary" type="submit" *ngIf="!hasClick" [disabled]="!form.valid">Save</ion-button>
+  <ion-button mode="ios" expand="block" color="primary" type="button" *ngIf="hasClick"><ion-spinner name="crescent"></ion-spinner></ion-button>
+  </form>
+
+</ion-content>

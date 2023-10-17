@@ -1,0 +1,33 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons><ion-back-button></ion-back-button></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+<div *ngIf="!data">
+<ion-skeleton-text [animated]="true" class="sek"></ion-skeleton-text><br>
+<ion-skeleton-text [animated]="true" class="sek"></ion-skeleton-text><br>
+<ion-skeleton-text [animated]="true" class="sek"></ion-skeleton-text><br>
+<ion-skeleton-text [animated]="true" class="sek"></ion-skeleton-text><br>
+<ion-skeleton-text [animated]="true" class="sek"></ion-skeleton-text><br>
+<ion-skeleton-text [animated]="true" class="sek"></ion-skeleton-text><br>
+<ion-skeleton-text [animated]="true" class="sek"></ion-skeleton-text><br>
+<ion-skeleton-text [animated]="true" class="sek"></ion-skeleton-text><br>
+</div>
+
+<div *ngIf="data">
+
+<h2 >Select your language preference</h2><br>
+
+<ion-item *ngFor="let lang of data" lines="none" detail (click)="setLang(lang)" mode="md">
+  <ion-avatar slot="start">
+    <img src="{{ lang.icon }}" />
+  </ion-avatar>
+  <ion-label>{{ lang.name }}</ion-label>
+</ion-item>
+
+</div>
+
+</ion-content>

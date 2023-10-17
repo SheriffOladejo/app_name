@@ -1,0 +1,37 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="tertiary">
+    <ion-title *ngIf="text">{{ text.view_report }}</ion-title>
+    <ion-buttons slot="start"><ion-back-button color="dark"></ion-back-button></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="data && text">
+<div class="top">
+<br><p class="heading">{{ text.report_betwen }} {{ data.from }} To {{ data.to }}</p>
+<ion-item lines="full" mode="md" class="total">
+<ion-label>{{ text.total_income }} <span class="green">{{ currency }}{{ data.income }}</span></ion-label>
+<ion-icon name="arrow-up-circle-outline" slot="start" color="primary"></ion-icon>
+</ion-item>
+
+<ion-item lines="full" mode="md" class="total">
+<ion-label>{{ text.total_expense }} <span class="red">{{ currency }}{{ data.expense }}</span></ion-label>
+<ion-icon name="arrow-down-circle-outline" slot="start" color="danger"></ion-icon>
+</ion-item>
+
+<ion-item lines="none" mode="md" class="total">
+<ion-label>{{ text.balance }} <span class="balance">{{ currency }}{{ data.balance }}</span></ion-label>
+<ion-icon name="arrow-up-circle-outline" slot="start" color="primary"></ion-icon>
+</ion-item>
+</div>
+
+<p>{{ text.showing }} {{ data.list.length }} {{ text.ent }} <ion-button class="pdf" size="small" mode="ios" href="{{ data.url }}" target="_blank">{{ text.download_pdf }}</ion-button></p>
+<ion-list>
+<ion-item *ngFor="let list of data.list" lines="full" mode="md">
+<ion-label>{{ list.bank }} <span [class]="list.type == 1 ? 'green' : 'red'">{{ currency }}{{ list.amount }}</span>
+<small class="date">{{ list.date_added | date:'d-MMM-yyyy' }} | {{ list.notes }}</small>
+</ion-label>
+</ion-item>
+
+</ion-list>
+
+</ion-content>

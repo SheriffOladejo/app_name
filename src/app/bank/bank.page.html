@@ -1,0 +1,42 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title>Payment Methods</ion-title>
+    <ion-buttons slot="start"><ion-back-button></ion-back-button></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  
+<div *ngIf="!data">
+<ion-skeleton-text [animated]="true" class="sek" *ngFor="let fake of fakeData"></ion-skeleton-text>
+</div>
+
+
+<div *ngIf="data">
+
+<img src="assets/wallet.avif" class="wallet">
+
+<h1 *ngIf="data && data.length == 0">Payment Methods</h1>
+<h4 *ngIf="data && data.length > 0">Payment Methods</h4>
+
+<div *ngIf="data.length == 0">
+<p class="no">There is no payment method added. Add new payment method for continue.</p>
+</div>
+
+<div *ngIf="data.length  > 0">
+
+<h1>{{ currency }}{{ total }} <p>Available Balance</p></h1><br>
+
+<ion-row *ngFor="let bank of data" (click)="presentActionSheet(bank)">
+<ion-col size="12" class="name">{{ bank.name }} <ion-icon name="arrow-forward-outline"></ion-icon></ion-col>
+<ion-col size="12" class="notes">{{ bank.notes }}</ion-col>
+<ion-col size="12" class="balance">{{ currency }}{{ bank.balance }}</ion-col>
+</ion-row>
+
+</div>
+
+<ion-button mode="ios" expand="block" (click)="openModel()" class="addNew" *ngIf="data"> Add New</ion-button>
+
+</div>
+
+</ion-content>

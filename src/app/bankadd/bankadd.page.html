@@ -1,0 +1,15 @@
+<ion-content class="ion-padding">
+
+<a (click)="close()">Close</a><br><br>
+
+<h3>New Payment Method</h3><br>
+
+<form #form="ngForm" (ngSubmit)="addNew(form.value,data.id)">
+<ion-input label="Name" name="name" [(ngModel)]="data.name" label-placement="floating" fill="outline" mode="md" [disabled]="hasClick"></ion-input><br>
+<ion-input type="tel" *ngIf="!data.id" label="Opening Balance" name="balance" [(ngModel)]="data.balance" label-placement="floating" fill="outline" mode="md" [disabled]="hasClick"></ion-input><br>
+<ion-input label="Notes" name="notes" [(ngModel)]="data.notes" label-placement="floating" fill="outline" mode="md" [disabled]="hasClick"></ion-input><br>
+<ion-button mode="ios" expand="block" color="primary" type="submit" *ngIf="!hasClick">Save</ion-button>
+<ion-button mode="ios" expand="block" color="primary" type="button" *ngIf="hasClick"><ion-spinner name="crescent"></ion-spinner></ion-button>
+</form>
+
+</ion-content>

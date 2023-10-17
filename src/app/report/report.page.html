@@ -1,0 +1,51 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title *ngIf="text">{{ text.get_report }}</ion-title>
+    <ion-buttons slot="start"><ion-back-button></ion-back-button></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="text">
+<br>
+<div class="ion-padding">
+
+<ion-item lines="none">
+<ion-label>{{ text.from }}</ion-label>
+<ion-input value="{{ from | date: 'dd-MM-yyyy' }}" id="f" class="ion-text-end" [disabled]="hasClick"></ion-input>
+
+<ion-popover trigger="f" size="auto">
+<ng-template>
+<ion-datetime presentation="date" [(ngModel)]="from"  locale="en" name="from" showDefaultButtons="true" required></ion-datetime>
+</ng-template>
+</ion-popover>
+</ion-item><br>
+
+<ion-item lines="none">
+<ion-label>{{ text.to }}</ion-label>
+<ion-input value="{{ to | date: 'dd-MM-yyyy' }}" id="t" class="ion-text-end" [disabled]="hasClick"></ion-input>
+
+<ion-popover trigger="t" size="auto">
+<ng-template>
+<ion-datetime presentation="date" [(ngModel)]="to"  locale="en" name="to" showDefaultButtons="true" required></ion-datetime>
+</ng-template>
+</ion-popover>
+</ion-item><br>
+
+<ion-select label="{{ text.ptype }}" placeholder="{{ text.all_type }}" [(ngModel)]="type" name="type" [disabled]="hasClick">
+<ion-select-option value="0">{{ text.all }}</ion-select-option>
+<ion-select-option value="1">{{ text.income }}</ion-select-option>
+<ion-select-option value="2">{{ text.expense }}</ion-select-option>
+</ion-select><br>
+
+<ion-select label="{{ text.payment_method }}" placeholder="{{ text.all }}" [(ngModel)]="bank_id" name="bank_id" [disabled]="hasClick">
+<ion-select-option value="0">{{ text.all_payment_method }}</ion-select-option>
+<ion-select-option [value]="b.id" *ngFor="let b of banks">{{ b.name }}</ion-select-option>
+</ion-select><br>
+
+<ion-button mode="ios" expand="block" (click)="getReport()" *ngIf="!hasClick">{{ text.get_report }}</ion-button>
+<ion-button mode="ios" expand="block" type="button" *ngIf="hasClick"><ion-spinner name="crescent"></ion-spinner></ion-button>
+
+
+</div>
+
+</ion-content>

@@ -1,0 +1,103 @@
+img
+{
+    width:30%;
+    margin-left: 35%;
+}
+
+h1
+{
+    text-align: center;
+}
+
+h2
+{
+    color:gray
+}
+
+.amount
+{
+    text-align: center;
+    line-height: 0.2;
+    color:gray;
+
+}
+
+ion-content
+{
+    --background:var(--ion-color-light);
+}
+
+ion-button
+{
+    margin-left: 30%;
+    margin-top: 20px;
+}
+
+.sek
+{
+    margin-top: 20px;
+    height: 60px;
+    border-radius: 10px;
+}
+
+ion-item
+{
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.goal
+{
+    margin-top: 5px;
+    display: block;
+    color:gray;
+}
+
+.per
+{
+    float: right;
+    color:var(--ion-color-primary);
+    font-size: 18px;
+}
+
+ion-progress-bar
+{
+    margin-top: 5%;
+}
+
+.no
+{
+    color:gray;
+    text-align: center;
+    margin-top: 20%;
+}
+
+small
+{
+    color:gray
+}
+
+.block {
+    width: 100%;
+    height: auto;
+  }
+  
+  ion-modal {
+    --height: auto;
+  }
+
+  .title
+  {
+    padding:10px 20px
+  }
+
+  .desc
+  {
+    float: right;
+    color:gray;
+  }
+
+  ion-row
+  {
+    text-align: center;
+  }

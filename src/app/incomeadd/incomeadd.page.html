@@ -1,0 +1,40 @@
+<ion-content class="ion-padding" *ngIf="text">
+
+  <a (click)="close()">{{ text.close }}</a><br><br>
+  
+  <h3 *ngIf="title">{{ title }}</h3><br>
+  
+  <form #form="ngForm" (ngSubmit)="addNew(form.value)">
+
+  <ion-item lines="none">
+  <ion-label>{{ text.select_date }}</ion-label>
+  <ion-input value="{{ date_added | date: 'dd-MM-yyyy' }}" id="f" class="ion-text-end" [disabled]="hasClick"></ion-input>
+
+  <ion-popover trigger="f" size="auto">
+  <ng-template>
+  <ion-datetime presentation="date" [(ngModel)]="date_added"  locale="en" name="date_added" showDefaultButtons="true" required></ion-datetime>
+  </ng-template>
+  </ion-popover>
+  </ion-item><br>
+
+  <ion-select label="{{ text.payment_method }}" placeholder="{{ text.select }}" [(ngModel)]="data.bank_id" name="bank_id" required [disabled]="hasClick">
+  <ion-select-option [value]="b.id" *ngFor="let b of banks">{{ b.name }}</ion-select-option>
+  </ion-select>
+  <br>
+  <ion-input type="tel" label="{{ text.amount }}" name="amount" [(ngModel)]="data.amount" label-placement="floating" fill="outline" mode="md" [disabled]="hasClick" required></ion-input><br>
+  <ion-input label="{{ text.notes }}" name="notes" [(ngModel)]="data.notes" label-placement="floating" fill="outline" mode="md" [disabled]="hasClick"></ion-input><br>
+
+  <ion-row class="logo">
+  <ion-col size="12"><p (click)="selectImage()"><ion-icon name="image-outline"></ion-icon> {{ text.attach_bill }}</p>
+
+  <p class="attch" *ngIf="hasImg">{{ text.img_success }} <a (click)="remove()">{{ text.remove }}</a></p>
+
+  </ion-col>
+  </ion-row>
+
+  <br>
+  <ion-button mode="ios" expand="block" [color]="type == 1 ? 'primary' : 'danger'" type="submit" *ngIf="!hasClick" [disabled]="!form.valid">{{ text.save }}</ion-button>
+  <ion-button mode="ios" expand="block" [color]="type == 1 ? 'primary' : 'danger'" type="button" *ngIf="hasClick"><ion-spinner name="crescent"></ion-spinner></ion-button>
+  </form>
+  
+  </ion-content>
