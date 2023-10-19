@@ -7,7 +7,7 @@
   
 <form #form="ngForm" (ngSubmit)="verify(form.value)">
 <h1>Verify Your Email</h1>
-<p class="desc">A verification code has been sent on you email address. Plase check and continue.</p>
+<p class="desc">A verification code has been sent on you email address. Please check and continue.</p>
 <br>
 <ion-row *ngIf="!hasClick">
 <ion-col size="3"><ion-input type="tel" #otp1 maxlength="1" name="otp_1" ngModel (ionInput)="otpChange($event,otp2,'')"></ion-input></ion-col>

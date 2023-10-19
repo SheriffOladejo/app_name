@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 export class ServerService {
   
   //url = "http://localhost/wise_spend/api/";
-  url = "API_URL_HERE";
+  url = "https://www.dollarpatrol.money/back_end/api/";
 
   constructor(private http: HttpClient) { }
 

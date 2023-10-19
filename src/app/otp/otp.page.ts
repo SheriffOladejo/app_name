@@ -68,7 +68,13 @@ export class OtpPage implements OnInit {
     
     this.hasClick = true;
 
+    console.log("server.verify");
+    this.otherService.toast("response verify: ");
+
     this.server.verifyOtp(data,this.id).subscribe((response:any) => {
+
+      console.log("server.verifyOTP");
+      this.otherService.toast("response msg: "+response.msg);
     
       if(response.msg != "done")
       {
@@ -76,6 +82,7 @@ export class OtpPage implements OnInit {
       }
       else
       {
+        this.otherService.toast("type: "+this.type);
         if(this.type == 1)
         {
             localStorage.setItem('user_id',response.user.id);
